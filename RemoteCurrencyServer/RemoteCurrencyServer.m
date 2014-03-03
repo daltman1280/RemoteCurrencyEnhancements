@@ -254,14 +254,11 @@
         static NSDictionary *  sValueFromCurrencyStr;
         
         if (sValueFromCurrencyStr == nil) {
-            sValueFromCurrencyStr = [[NSDictionary alloc] initWithObjectsAndKeys:
-                [NSNumber numberWithDouble:1.3246], @"USD", 
-                [NSNumber numberWithDouble:1.0],    @"EUR", 
-                [NSNumber numberWithDouble:0.848],  @"GBP", 
-                [NSNumber numberWithDouble:110.86], @"JPY", 
-                [NSNumber numberWithDouble:1.3508], @"AUD", 
-                nil
-            ];
+			NSArray *availableCurrenciesArray;
+			NSArray *exchangeRatesArray;
+			availableCurrenciesArray = [self availableCurrencies];
+			exchangeRatesArray = [self exchangeRates];
+			sValueFromCurrencyStr = [[NSDictionary dictionaryWithObjects:exchangeRatesArray forKeys:availableCurrenciesArray] retain];
             assert(sValueFromCurrencyStr != nil);
         }
         
@@ -273,6 +270,33 @@
         }
     }
     return success;
+}
+
+- (NSArray *)availableCurrencies
+{
+	NSDictionary *dict = [[[NSDictionary alloc] initWithContentsOfFile:@"Currencies.plist"] autorelease];
+	assert(dict != nil);
+	NSArray *currenciesArray = [dict objectForKey:@"Currencies"];
+	assert(currenciesArray != nil);
+	return currenciesArray;
+}
+
+- (NSArray *)exchangeRates
+{
+	NSDictionary *dict = [[[NSDictionary alloc] initWithContentsOfFile:@"Currencies.plist"] autorelease];
+	assert(dict != nil);
+	NSArray *ratesArray = [dict objectForKey:@"ExchangeRates"];
+	assert(ratesArray != nil);
+	return ratesArray;
+}
+
+- (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection currenciesCommand:(NSScanner *)scanner
+{
+    assert(connection != nil);
+    assert([scanner isAtEnd]);
+	NSArray *availableCurrencies;
+	availableCurrencies = [self availableCurrencies];
+	[connection sendResponse:@"OK" lines:availableCurrencies];
 }
 
 - (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection convertCommand:(NSScanner *)scanner
