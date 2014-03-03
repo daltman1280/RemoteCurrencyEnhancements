@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25EB218B18C2EA7300F683D4 /* Currencies.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Currencies.plist; sourceTree = "<group>"; };
 		E41782C3138E88DA00A30272 /* RemoteCurrencyServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RemoteCurrencyServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		E470785212B92EE6008EA01C /* QCommandLineConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = QCommandLineConnection.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		E470785312B92EE6008EA01C /* QCommandLineConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = QCommandLineConnection.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -50,6 +51,7 @@
 		08FB7794FE84155DC02AAC07 /* RemoteCurrencyServer */ = {
 			isa = PBXGroup;
 			children = (
+				25EB218B18C2EA7300F683D4 /* Currencies.plist */,
 				E4B03C5E12B7B67500A1642B /* main.m */,
 				E4B03C6E12B7B6B000A1642B /* RemoteCurrencyServer.h */,
 				E4B03C6F12B7B6B000A1642B /* RemoteCurrencyServer.m */,
@@ -94,6 +96,7 @@
 			buildPhases = (
 				8DD76FAB0486AB0100D96B5E /* Sources */,
 				8DD76FAD0486AB0100D96B5E /* Frameworks */,
+				25EB218E18C2EF8500F683D4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -111,7 +114,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "RemoteCurrencyServer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -132,6 +135,22 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		25EB218E18C2EF8500F683D4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp Currencies.plist $BUILT_PRODUCTS_DIR";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DD76FAB0486AB0100D96B5E /* Sources */ = {
@@ -167,7 +186,6 @@
 		1DEB928A08733DD80010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -184,9 +202,11 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wall",
+					"-Werror",
 					"-Wextra",
 					"-Wfloat-equal",
 					"-Wpointer-arith",
@@ -199,7 +219,6 @@
 		1DEB928B08733DD80010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_DYNAMIC_NO_PIC = YES;
@@ -219,6 +238,7 @@
 				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wall",
+					"-Werror",
 					"-Wextra",
 					"-Wfloat-equal",
 					"-Wpointer-arith",
