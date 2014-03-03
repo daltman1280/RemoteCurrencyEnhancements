@@ -80,17 +80,30 @@
 - (void)startAccessingCurrencies
 {
 	NSString *command;
+
+    // If the connection is not open, open it.
+	
 	if (self.connection == nil) {
-		NSInputStream *input;
-		NSOutputStream *output;
-		[self.netService getInputStream:&input outputStream:&output];
-		self.connection = [[[RemoteCurrencyClientConnection alloc] initWithInputStream:input outputStream:output] autorelease];
-		self.connection.clientDelegate = self;
-		self.connection.name = [[self class] nextConnectionName];
-		[self.connection open];
-		[input release];
-		[output release];
-		self.status = kRemoteCurrencyAccessorIdle;
+        NSInputStream *     input;
+        NSOutputStream *    output;
+		
+        assert( (self.status == kRemoteCurrencyAccessorInitialised) || (self.status == kRemoteCurrencyAccessorClosed) || (self.status == kRemoteCurrencyAccessorFailed) );
+        
+        [self.netService getInputStream:&input outputStream:&output];
+        
+        self.connection = [[[RemoteCurrencyClientConnection alloc] initWithInputStream:input outputStream:output] autorelease];
+        self.connection.clientDelegate = self;
+        self.connection.name = [[self class] nextConnectionName];
+        [self.connection open];
+        
+        // -[NSNetService getInputStream:outputStream:] currently returns the stream
+        // with a reference that we have to release (something that's counter to the
+        // standard Cocoa memory management rules <rdar://problem/6868813>).
+        
+        [input release];
+        [output release];
+        
+        self.status = kRemoteCurrencyAccessorIdle;
 	}
 	assert((self.status == kRemoteCurrencyAccessorIdle || (self.status == kRemoteCurrencyAccessorAccessing)));
 	command = @"currencies";
