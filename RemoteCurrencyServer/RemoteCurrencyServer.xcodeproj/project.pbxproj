@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25877FE718C4251A0014116D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25877FE618C4251A0014116D /* XCTest.framework */; };
+		25877FED18C4251A0014116D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25877FEB18C4251A0014116D /* InfoPlist.strings */; };
+		25877FEF18C4251A0014116D /* RemoteCurrencyServer_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25877FEE18C4251A0014116D /* RemoteCurrencyServer_Tests.m */; };
 		E45A3CDA138EA0720089A06B /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B03C6212B7B68B00A1642B /* CoreServices.framework */; };
 		E470785412B92EE6008EA01C /* QCommandLineConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E470785312B92EE6008EA01C /* QCommandLineConnection.m */; };
 		E470785712B92FEE008EA01C /* RemoteCurrencyServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E470785612B92FEE008EA01C /* RemoteCurrencyServerConnection.m */; };
@@ -17,7 +20,23 @@
 		E4B03C7C12B7B6F600A1642B /* QServer.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B03C7812B7B6F600A1642B /* QServer.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		25877FF118C4251A0014116D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD76FA90486AB0100D96B5E;
+			remoteInfo = RemoteCurrencyServer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		25877FE518C425190014116D /* RemoteCurrencyServer Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RemoteCurrencyServer Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		25877FE618C4251A0014116D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		25877FEA18C4251A0014116D /* RemoteCurrencyServer Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RemoteCurrencyServer Tests-Info.plist"; sourceTree = "<group>"; };
+		25877FEC18C4251A0014116D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		25877FEE18C4251A0014116D /* RemoteCurrencyServer_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteCurrencyServer_Tests.m; sourceTree = "<group>"; };
+		25877FF018C4251A0014116D /* RemoteCurrencyServer Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RemoteCurrencyServer Tests-Prefix.pch"; sourceTree = "<group>"; };
 		25EB218B18C2EA7300F683D4 /* Currencies.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Currencies.plist; sourceTree = "<group>"; };
 		E41782C3138E88DA00A30272 /* RemoteCurrencyServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RemoteCurrencyServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		E470785212B92EE6008EA01C /* QCommandLineConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = QCommandLineConnection.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -36,6 +55,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		25877FE218C425190014116D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25877FE718C4251A0014116D /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76FAD0486AB0100D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,10 +85,31 @@
 				E470785512B92FEE008EA01C /* RemoteCurrencyServerConnection.h */,
 				E470785612B92FEE008EA01C /* RemoteCurrencyServerConnection.m */,
 				E4B03C7412B7B6F600A1642B /* Libraries */,
+				25877FE818C4251A0014116D /* RemoteCurrencyServer Tests */,
 				E4B03C6612B7B69300A1642B /* Frameworks */,
 				E41782C3138E88DA00A30272 /* RemoteCurrencyServer */,
+				25877FE518C425190014116D /* RemoteCurrencyServer Tests.xctest */,
 			);
 			name = RemoteCurrencyServer;
+			sourceTree = "<group>";
+		};
+		25877FE818C4251A0014116D /* RemoteCurrencyServer Tests */ = {
+			isa = PBXGroup;
+			children = (
+				25877FEE18C4251A0014116D /* RemoteCurrencyServer_Tests.m */,
+				25877FE918C4251A0014116D /* Supporting Files */,
+			);
+			path = "RemoteCurrencyServer Tests";
+			sourceTree = "<group>";
+		};
+		25877FE918C4251A0014116D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				25877FEA18C4251A0014116D /* RemoteCurrencyServer Tests-Info.plist */,
+				25877FEB18C4251A0014116D /* InfoPlist.strings */,
+				25877FF018C4251A0014116D /* RemoteCurrencyServer Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E4B03C6612B7B69300A1642B /* Frameworks */ = {
@@ -69,6 +117,7 @@
 			children = (
 				E4B03C6012B7B68700A1642B /* Foundation.framework */,
 				E4B03C6212B7B68B00A1642B /* CoreServices.framework */,
+				25877FE618C4251A0014116D /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,6 +139,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		25877FE418C425190014116D /* RemoteCurrencyServer Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25877FF518C4251A0014116D /* Build configuration list for PBXNativeTarget "RemoteCurrencyServer Tests" */;
+			buildPhases = (
+				25877FE118C425190014116D /* Sources */,
+				25877FE218C425190014116D /* Frameworks */,
+				25877FE318C425190014116D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				25877FF218C4251A0014116D /* PBXTargetDependency */,
+			);
+			name = "RemoteCurrencyServer Tests";
+			productName = "RemoteCurrencyServer Tests";
+			productReference = 25877FE518C425190014116D /* RemoteCurrencyServer Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8DD76FA90486AB0100D96B5E /* RemoteCurrencyServer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "RemoteCurrencyServer" */;
@@ -115,6 +182,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					25877FE418C425190014116D = {
+						TestTargetID = 8DD76FA90486AB0100D96B5E;
+					};
+				};
 			};
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "RemoteCurrencyServer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -125,6 +197,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* RemoteCurrencyServer */;
 			productRefGroup = 08FB7794FE84155DC02AAC07 /* RemoteCurrencyServer */;
@@ -132,9 +205,21 @@
 			projectRoot = "";
 			targets = (
 				8DD76FA90486AB0100D96B5E /* RemoteCurrencyServer */,
+				25877FE418C425190014116D /* RemoteCurrencyServer Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		25877FE318C425190014116D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25877FED18C4251A0014116D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		25EB218E18C2EF8500F683D4 /* ShellScript */ = {
@@ -153,6 +238,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		25877FE118C425190014116D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25877FEF18C4251A0014116D /* RemoteCurrencyServer_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76FAB0486AB0100D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -167,6 +260,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		25877FF218C4251A0014116D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DD76FA90486AB0100D96B5E /* RemoteCurrencyServer */;
+			targetProxy = 25877FF118C4251A0014116D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		25877FEB18C4251A0014116D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25877FEC18C4251A0014116D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB928608733DD80010E9CD /* Debug */ = {
@@ -248,6 +360,80 @@
 			};
 			name = Release;
 		};
+		25877FF318C4251A0014116D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RemoteCurrencyServer Tests/RemoteCurrencyServer Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "RemoteCurrencyServer Tests/RemoteCurrencyServer Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		25877FF418C4251A0014116D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RemoteCurrencyServer Tests/RemoteCurrencyServer Tests-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "RemoteCurrencyServer Tests/RemoteCurrencyServer Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -268,6 +454,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		25877FF518C4251A0014116D /* Build configuration list for PBXNativeTarget "RemoteCurrencyServer Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25877FF318C4251A0014116D /* Debug */,
+				25877FF418C4251A0014116D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
