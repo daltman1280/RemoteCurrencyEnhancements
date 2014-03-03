@@ -124,15 +124,27 @@
     [self.browserArray addObserver:self forKeyPath:@"selectedObjects" options:NSKeyValueObservingOptionInitial context:&self->browserArray_];
 }
 
+/*
+ Want fromCurrencies to observe changes in currencyObj
+ */
+
 + (NSSet *)keyPathsForValuesAffectingFromCurrencies
 {
 	return [NSSet setWithObject:@"self.currencyObj"];
 }
 
+/*
+ Depends on and observes currencyObj
+ */
+
 - (NSArray *)fromCurrencies
 {
 	return self.currencyObj;
 }
+
+/*
+ Depends on and observes currencyObj
+ */
 
 + (NSSet *)keyPathsForValuesAffectingToCurrencies
 {
@@ -160,10 +172,18 @@
     return result;
 }
 
+/*
+ Want currencyObj to observe network changes, including services browser selection changes.
+ */
+
 + (NSSet *)keyPathsForValuesAffectingCurrencyObj
 {
 	return [NSSet setWithObject:@"remoteAccessor.networkActive"];
 }
+
+/*
+ Gets notified when results of RemoteCurrencyAccessor request have been processed, and returns the result
+ */
 
 - (NSArray *)currencyObj
 {
