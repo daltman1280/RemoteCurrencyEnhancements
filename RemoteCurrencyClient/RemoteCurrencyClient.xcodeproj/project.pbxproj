@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25877FE018C34A9A0014116D /* RemoteCurrencyAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 25877FDF18C34A9A0014116D /* RemoteCurrencyAccessor.m */; };
 		E4132141138FC9D000650385 /* QBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E4132140138FC9D000650385 /* QBrowser.m */; };
 		E425189A0FA893B00098F8B1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E42518990FA893B00098F8B1 /* MainMenu.xib */; };
 		E470787F12B97D27008EA01C /* QCommandLineConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E470787E12B97D27008EA01C /* QCommandLineConnection.m */; };
@@ -22,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		25877FDE18C34A9A0014116D /* RemoteCurrencyAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteCurrencyAccessor.h; sourceTree = "<group>"; };
+		25877FDF18C34A9A0014116D /* RemoteCurrencyAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteCurrencyAccessor.m; sourceTree = "<group>"; };
 		E413213F138FC9D000650385 /* QBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBrowser.h; sourceTree = "<group>"; };
 		E4132140138FC9D000650385 /* QBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBrowser.m; sourceTree = "<group>"; };
 		E41782BD138E88DA00A30272 /* RemoteCurrencyClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteCurrencyClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +71,8 @@
 				E4B03D9A12B7DB2F00A1642B /* MainWindow.xib */,
 				E4D058FB12B815BD00E80A82 /* RemoteCurrencyConverter.h */,
 				E4D058FC12B815BD00E80A82 /* RemoteCurrencyConverter.m */,
+				25877FDE18C34A9A0014116D /* RemoteCurrencyAccessor.h */,
+				25877FDF18C34A9A0014116D /* RemoteCurrencyAccessor.m */,
 				E470788012B97DC8008EA01C /* RemoteCurrencyClientConnection.h */,
 				E470788112B97DC8008EA01C /* RemoteCurrencyClientConnection.m */,
 				E4B03D7612B7D75E00A1642B /* Libraries */,
@@ -167,6 +172,7 @@
 				E4DCE77A0CCE748F005FEAE3 /* main.m in Sources */,
 				E4DCE7C70CCE818B005FEAE3 /* AppDelegate.m in Sources */,
 				E4B03D7D12B7D75E00A1642B /* QCommandConnection.m in Sources */,
+				25877FE018C34A9A0014116D /* RemoteCurrencyAccessor.m in Sources */,
 				E4B03D8712B7D86300A1642B /* MainWindowController.m in Sources */,
 				E4D058FD12B815BD00E80A82 /* RemoteCurrencyConverter.m in Sources */,
 				E470787F12B97D27008EA01C /* QCommandLineConnection.m in Sources */,
@@ -202,6 +208,7 @@
 				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wall",
+					"-Werror",
 					"-Wextra",
 					"-Wfloat-equal",
 					"-Wpointer-arith",
@@ -235,6 +242,7 @@
 				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wall",
+					"-Werror",
 					"-Wextra",
 					"-Wfloat-equal",
 					"-Wpointer-arith",
