@@ -54,10 +54,12 @@
 #import "MainWindowController.h"
 
 #import "RemoteCurrencyConverter.h"
+#import "RemoteCurrencyAccessor.h"
 
 @interface MainWindowController () <QBrowserDelegate>
 
 @property (nonatomic, retain, readwrite) RemoteCurrencyConverter *  remote;
+@property (nonatomic, retain, readwrite) RemoteCurrencyAccessor *	remoteAccessor;
 
 @end
 
@@ -67,6 +69,7 @@
 @synthesize browserArray = browserArray_;
 
 @synthesize remote       = remote_;
+@synthesize remoteAccessor = remoteAccessor_;
 @synthesize browserSortDescriptors = browserSortDescriptors_;
 @synthesize fromCurrency = fromCurrency_;
 @synthesize fromValueObj = fromValueObj_;
@@ -103,7 +106,11 @@
     [self removeObserver:self forKeyPath:@"fromCurrency"];
     [self removeObserver:self forKeyPath:@"fromValueObj"];
     [self removeObserver:self forKeyPath:@"toCurrency"];
+	[self removeObserver:self forKeyPath:@"fromCurrencies"];
+	[self removeObserver:self forKeyPath:@"toCurrencies"];
+	[self removeObserver:self forKeyPath:@"currencyObj"];
     [self->remote_ release];
+	[self->remoteAccessor_ release];
     [self->browserSortDescriptors_ release];
     [self->fromCurrency_ release];
     [self->toCurrency_ release];
@@ -117,22 +124,19 @@
     [self.browserArray addObserver:self forKeyPath:@"selectedObjects" options:NSKeyValueObservingOptionInitial context:&self->browserArray_];
 }
 
++ (NSSet *)keyPathsForValuesAffectingFromCurrencies
+{
+	return [NSSet setWithObject:@"self.currencyObj"];
+}
+
 - (NSArray *)fromCurrencies
 {
-    static NSArray * sFromCurrencies;
-    
-    if (sFromCurrencies == nil) {
-        sFromCurrencies = [[NSArray alloc] initWithObjects:
-            @"USD",
-            @"EUR",
-            @"GBP",
-            @"JPY",
-            @"AUD",
-            nil
-        ];
-        assert(sFromCurrencies != nil);
-    }
-    return sFromCurrencies;
+	return self.currencyObj;
+}
+
++ (NSSet *)keyPathsForValuesAffectingToCurrencies
+{
+	return [NSSet setWithObject:@"self.currencyObj"];
 }
 
 - (NSArray *)toCurrencies
@@ -154,6 +158,21 @@
         result = self.remote.result;
     }
     return result;
+}
+
++ (NSSet *)keyPathsForValuesAffectingCurrencyObj
+{
+	return [NSSet setWithObject:@"remoteAccessor.networkActive"];
+}
+
+- (NSArray *)currencyObj
+{
+	NSArray *result;
+	result = nil;
+	if (self.remoteAccessor != nil) {
+		result = self.remoteAccessor.result;
+	}
+	return result;
 }
 
 + (NSSet *)keyPathsForValuesAffectingBusy
@@ -182,6 +201,10 @@
             [self.remote stopConverting];
             self.remote = nil;
         }
+		if (self.remoteAccessor != nil) {
+			[self.remoteAccessor stopAccessing];
+			self.remoteAccessor = nil;
+		}
 
         if ([[self.browserArray selectedObjects] count] != 0) {
             NSNetService *  selectedNetService;
@@ -194,6 +217,9 @@
             if ( (self.fromValueObj != nil) ) {
                 [self.remote startConvertingValue:[self.fromValueObj doubleValue] fromCurrency:self.fromCurrency toCurrency:self.toCurrency];
             }
+			self.remoteAccessor = [[[RemoteCurrencyAccessor alloc] initWithNetService:selectedNetService] autorelease];
+			assert(self.remoteAccessor != nil);
+			[self.remoteAccessor startAccessingCurrencies];
         }
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
