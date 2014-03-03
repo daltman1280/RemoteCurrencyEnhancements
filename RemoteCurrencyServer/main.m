@@ -50,6 +50,7 @@
                 SUCH DAMAGE.
 
 */
+#import "RemoteCurrencyServerConnection.h"
 #import "RemoteCurrencyServer.h"
 
 #include <getopt.h>

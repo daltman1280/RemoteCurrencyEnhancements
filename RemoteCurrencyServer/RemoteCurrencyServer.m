@@ -51,9 +51,8 @@
 
 */
 
-#import "RemoteCurrencyServer.h"
-
 #import "RemoteCurrencyServerConnection.h"
+#import "RemoteCurrencyServer.h"
 
 #import "QServer.h"
 

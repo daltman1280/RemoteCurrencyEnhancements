@@ -77,4 +77,8 @@
     // A convenience method that calls -start, then runs the run loop indefinitely 
     // until someone calls -stop.
 
+- (NSArray *)availableCurrencies;
+- (NSArray *)exchangeRates;
+- (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection currenciesCommand:(NSScanner *)scanner;
+
 @end
