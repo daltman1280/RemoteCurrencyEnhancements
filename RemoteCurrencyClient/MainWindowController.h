@@ -78,6 +78,7 @@
 @property (nonatomic, copy,   readwrite) NSNumber *     fromValueObj;
 @property (nonatomic, copy,   readwrite) NSString *     toCurrency;
 @property (nonatomic, copy,   readonly ) NSNumber *     toValueObj;
+@property (nonatomic, copy,   readonly ) NSArray  *		currencyObj;
 
 @property (nonatomic, assign, readonly ) BOOL           busy;
 
