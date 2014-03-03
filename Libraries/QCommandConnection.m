@@ -163,7 +163,7 @@
     // Creates an error in the kQCommandConnectionErrorDomain domain 
     // with the specified code and (not really) user-visible string.
 {
-    NSMutableDictionary *   userInfo;
+    NSDictionary *			userInfo;
     NSString *              description;
     
     assert(code != 0);
