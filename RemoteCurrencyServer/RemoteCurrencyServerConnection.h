@@ -140,6 +140,7 @@
 - (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection goodbyeCommand:(NSScanner *)scanner;
 - (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection stopCommand:(NSScanner *)scanner;
 - (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection convertCommand:(NSScanner *)scanner;
+- (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection currenciesCommand:(NSScanner *)scanner;
 
 - (void)remoteCurrencyServerConnection:(RemoteCurrencyServerConnection *)connection logWithFormat:(NSString *)format arguments:(va_list)argList;
     // Called when the connection wants to log something.

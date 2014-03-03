@@ -184,6 +184,11 @@
                 [NSNumber numberWithBool:YES],                      @"hasArguments", 
                 nil
             ], @"convert",
+            [NSDictionary dictionaryWithObjectsAndKeys:
+                @"remoteCurrencyServerConnection:currenciesCommand:",     @"selector",
+                @"currencies",                                      @"usage",
+                nil
+            ], @"currencies",
             nil
         ];
         assert(sCommands != nil);
