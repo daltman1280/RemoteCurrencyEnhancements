@@ -1,0 +1,70 @@
+The following changes were made to the Currency Converter Client and Server projects. The explanation will be easier to follow if we proceed from the bottom up.
+
+Server:
+
+Overall, the task is pretty straightforward:
+
+1. Need to access the list of currencies from an external source. This is accomplished with two new methods of RemoteCurrencyServer class:
+
+- availableCurrencies:
+- exchangeRates:
+
+They both use the Currencies.plist (which is copied to the BUILT_PRODUCTS_DIR) as a Run Script build phase, so that it can be opened from the working folder of RemoteCurrencyServer. The exchangeRates (which isn’t part of the original requirements) method is required, in order to avoid the use of hard-coded exchange rates, which would interfere with unit testing, and moreover, would fail in practice, when connecting to a currency server which recognizes a different list of currencies.
+
+2. - scanCurrency:from: has been updated to use the new methods to initialize its dictionary of currency names and exchange rates.
+
+3. A new method: - remoteCurrencyServerConnection:currenciesCommand: implements a new RemoteCurrencyServer command: currencies, which returns a multi-line response, which it’s obtained by messaging - availableCurrencies.
+
+4. In RemoteServerCurrencyConnection, - commandDictionary was modified to recognize the new currencies command, and the new method - remoteCurrencyServerConnection:currenciesCommand: was added to the RemoteCurrencyServerConnectionDelegate protocol definition.
+
+Client:
+
+The client task is more involved. The issues are related to the most effective way to refactor the existing classes, and the timing of and propagation of the results of the new messaging.
+
+Implementing messaging on the client side
+
+Note: instead of repeating the class names RemoteCurrencyConverter, RemoteCurrencyAccessor, and RemoteCurrencyClientConnection, I’ll just abbreviate them as RCC, RCA, and RCCC.
+
+The mechanics of the client messaging are contained in the existing code (the syntax specific logic is in RCC). The client messaging involves some syntactic differences, but these are straightforward. The main issue is deciding how to factor the updates. I considered 3 possible approaches>
+
+1. Create a new class for the currencies command, RCA, which mimics RCC, except for the essential differences: the command and response syntax, and the side effects (the storage of the data object that represents the list of currency names). This has the disadvantage the it duplicates some logic, instance variables, and types, from RCC. The advantage is that it has some independence from RCC.
+
+2. Modify RCC to support the new command. A method analogous to - networkStartConvertingValue:fromCurrency:toCurrency: would handle initiating the request. The problem is the response handling, which is currently initiated from RCCC, which directly messages its delegate with: - remoteCurrencyClientConnection:didReceiveResponse:lines:. Without modifying RCCC, there’s no way to control which command’s response method to call. A workaround would consist of factoring - remoteCurrencyClientConnection:didReceiveResponse:lines: into messaging the appropriate responder method (convert or currencies), based on an instance variable.
+
+3. Refactor RCC into a base class, RemoteCurrencyCommand, and 2 subclasses: RCC and RCA. If one were planning on implementing a number of commands, this approach would be worth considering, but in the current context, it seems like a pretty fundamental change. Like the previous approach
+
+I chose the first approach, mainly because it involved creating a new class, with no impact on either RCC or RCCC.
+
+A new class: RemoteCurrencyAccessor
+
+A duplication of RCC, except that a method: - startAccessingCurrencies, has been substituted for RCC’s -networkStartConvertingValue:fromCurrency:toCurrency:, and the - remoteCurrencyClientConnection:didReceiveResponse:lines: method implements the logic for the currencies command responder to update its value object using the results of the request. The logic is that an instance of NSScanner is used for each line of the response, to extract the currency name from any whitespace. The outcome, an NSMutableArray, is stored in the result instance variable, which is required to be observable, for the same reasons as is RCC’s results instance variable.
+
+MainWindowController (MWC) changes
+
+The addition of the remoteAccessor property, to reference the RCA instance (similar to the remote property to reference the RCC instance).
+
+A KVC accessor, - (NSArray *)currencyObj is used to access the RCA instance’s value object (obtained during response handling), analogous to - (NSNumber *)toValueObj, which is similarly used with RCC.
+
+Some issues
+
+The way that MWC’s bindings are structured has the effect that there’s no way for KVO to support the necessary client messaging. This requires some minor restructuring of KVO in MWC (see following paragraphs), to address two related problems.
+
+The fromCurrency and toCurrency popup menus are bound to MWC’s - fromCurrencies. The overall approach consists of issuing the client messaging for RCA when the list of currencies is required.
+
+1. fromCurrencies is called once, while the main window is loading. In order to invoke RCA, we need to have a RemoteCurrency service. This will only be available to us when we have been notified (which we won’t be able to process until after the window is loaded). Furthermore, it requires the service browser (represented by a table in the window) to be populated and a row selected (which will occur as a default, based on the table’s settings). Only then will - observeValueForKeyPath:ofObject:change:context: be called, which is the context in which we can perform this messaging ( RCC’s startConvertingValue:fromCurrency:toCurrency: and RCA’s startAccessingCurrencies).
+
+2. There is no mechanism by which the array of currency names will respond to service changes (based on row selection in the service browser table). For this reason, the user might use fromCurrency or toCurrency popup settings which are not supported by the active RemoteCurrency server.
+
+The solution consists of setting up KVO for some additional key paths in MWC, and initiating the currencies command in the proper context.
+
+1. remoteAccessor.networkActive: becomes observable to currencyObj accessor, insuring that the currency list will be refreshed once the currencies command response has been processed.
+
+2. self.currencyObj: becomes observable to - (NSArray *)fromCurrencies (which now references RCA’s value object, currencyObj property). This insures that fromCurrency and toCurrency popup menus will be repopulated the the list of currencies changes.
+
+3. RCA startAccessingCurrencies is called from our existing main observer, from where RCC’s networkStartConvertingValue:fromCurrency:toCurrency: is currently called. This insures that: a) RCA is only invoked from the proper context, and b) RCA will be invoke whenever appropriate (for the same reasons that apply to RCC).
+
+Miscellaneous changes:
+
+1. The project settings were modified to include the -Werror compiler flag. This necessitated a single change to QCommandConnection.m: in method + errorWithCode: a declaration was changed to make its type match its expected type in its usage (changed from NSMutableDictionary to NSDictionary.
+
+2. Adding a git repository to a project (from Terminal) required the project to be opened in Xcode 4.5 before the repository would be recognized in Xcode 5.0.2.
